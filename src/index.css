@@ -1,0 +1,81 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f5f5f5;
+}
+
+.container {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+/* ЛЕВАЯ КОЛОНКА (СПИСОК) */
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 250px;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+li {
+    padding: 12px;
+    cursor: pointer;
+    border-bottom: 1px solid #eee;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+li:hover {
+    background-color: #f3f6ff;
+}
+
+li:last-child {
+    border-bottom: none;
+}
+
+/* АКТИВНЫЙ ПОЛЬЗОВАТЕЛЬ */
+li.active {
+    background: linear-gradient(135deg, #0d6efd, #4dabf7);
+    color: white;
+    font-weight: 600;
+    position: relative;
+}
+
+/* ПРАВАЯ КОЛОНКА (DETAILS) */
+.details {
+    width: 400px;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.details.empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+    color: #888;
+    font-size: 16px;
+    text-align: center;
+}
+
+.details img {
+    width: 100%;
+    display: block;
+}
+
+.details h2 {
+    margin: 15px;
+}
+
+.details p {
+    margin: 10px 15px;
+    padding: 10px;
+    border-top: 1px solid #eee;
+}
