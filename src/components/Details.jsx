@@ -7,19 +7,27 @@ function Details({ info }) {
   useEffect(() => {
     if (!info) return;
 
-    setLoading(true);
-    setUserData(null);
-
-    fetch(
-      `https://raw.githubusercontent.com/netology-code/ra16-homeworks/master/hooks-context/use-effect/data/${info.id}.json`
-    )
-      .then((res) => res.json())
-      .then((data) => {
+    const fetchData = async () => {
+      setLoading(true);
+      setUserData(null);
+      
+      try {
+        const response = await fetch(
+          `https://raw.githubusercontent.com/netology-code/ra16-homeworks/master/hooks-context/use-effect/data/${info.id}.json`
+        );
+        if (!response.ok) {
+          throw new Error("Ошибка загрузки данных");
+        }
+        const data = await response.json();
         setUserData(data);
-      })
-      .finally(() => {
+      } catch (error) {
+        console.error("Ошибка при получении профиля:", error);
+      } finally {
         setLoading(false);
-      });
+      }
+    };
+
+    fetchData();
   }, [info?.id]);
 
   if (!info) {
@@ -36,11 +44,11 @@ function Details({ info }) {
 
   return (
     <div className="details">
-      <img src={userData.avatar} alt={userData.name} />
+      <img key={userData.id} src={userData.avatar} alt={userData.name} />
       <h2>{userData.name}</h2>
-      <p>City: {userData.details.city}</p>
-      <p>Company: {userData.details.company}</p>
-      <p>Position: {userData.details.position}</p>
+      <p>City: {userData.details?.city}</p>
+      <p>Company: {userData.details?.company}</p>
+      <p>Position: {userData.details?.position}</p>
     </div>
   );
 }
